@@ -1,0 +1,24 @@
+{
+  "name": "mysanta",
+  "main": "index.js",
+  "version": "1.0.0",
+  "authors": [
+    "Jigar Jain <jigar@grallo.com>"
+  ],
+  "keywords": [
+    "mysanta"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/thirdparty/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.4.7"
+  }
+}

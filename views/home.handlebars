@@ -1,2 +1,101 @@
 
-<a href="/auth/twitter" class="btn">twitter</a>
+<div class="row banner">
+    <div class="small-12 columns">
+        <h1 class="headline">Everyone has their own santa</h1>
+
+        <div class="action">
+            <a href="#" class="button radius cta">I am in!</a>
+        </div>
+    </div>
+</div><!-- /.banner -->
+
+
+<div class="section how-it-works">
+    <h3 class="section-title">How it works</h3>
+    <div class="row">
+        <div class="small-12 medium-6 large-3 columns step">
+            <img src="/static/img/card.png" class="step-img">
+            <h5 class="step-title">Create wishlist</h5>
+            <p class="step-content">Add your details alongwith your wishlist. Be realistic while doing so ;)</p>
+        </div>
+        <div class="small-12 medium-6 large-3 columns step">
+            <img src="/static/img/socks.png" class="step-img">
+            <h5 class="step-title">Wait for the draw</h5>
+            <p class="step-content">Wait for us. On 15th Dec, we will take out a draw</p>
+        </div>
+        <div class="small-12 medium-6 large-3 columns step">
+            <img src="/static/img/santa.png" class="step-img">
+            <h5 class="step-title">Get assigned a Santa</h5>
+            <p class="step-content">Everyone will be paired by others & your wishlist will be exchanged</p>
+        </div>
+        <div class="small-12 medium-6 large-3 columns step">
+            <img src="/static/img/toy.png" class="step-img">
+            <h5 class="step-title">Send & Receive gifts</h5>
+            <p class="step-content">It's festival time. They have been good to you. Give them the gift santa :P</p>
+        </div>
+    </div>
+</div> <!-- /.how-it-works -->
+
+<div class="row">
+    <div class="medium-5 large-7 columns section add-yourself">
+        <h3 class="section-title text-left">Simply register below</h3>
+        <form method="post" action="/" class="registration-form">
+            <div class="row">
+                <div class="large-12 columns">
+                    <input type="text" name="name" maxlength="120" autocomplete="off" placeholder="Your full name" required class="radius custom-input">
+                </div>
+                <div class="large-12 columns">
+                    <input type="email" name="email" autocomplete="off" placeholder="Your email" required class="radius custom-input">
+                </div>
+                <div class="large-12 columns">
+                    <input type="text" name="city" autocomplete="off" placeholder="Your current city" required class="radius custom-input">
+                </div>
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-4 columns">
+                            <span class="prefix custom-prefix">Wishlist #1</span>
+                        </div>
+                        <div class="small-8 columns">
+                            <input type="text" name="wishlist[]" maxlength="100" autocomplete="off" placeholder="e.g. Game of thrones book series" class="custom-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-4 columns">
+                            <span class="prefix custom-prefix">Wishlist #2</span>
+                        </div>
+                        <div class="small-8 columns">
+                            <input type="text" name="wishlist[]" maxlength="100" autocomplete="off" placeholder="e.g. Some comic tshirt" class="custom-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-4 columns">
+                            <span class="prefix custom-prefix">Wishlist #3</span>
+                        </div>
+                        <div class="small-8 columns">
+                            <input type="text" name="wishlist[]" maxlength="100" autocomplete="off" placeholder="e.g. Hershey's Chocolates" class="custom-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="large-12 columns text-center">
+                    <input type="submit" value="Submit" class="button radius submit">
+                </div>
+            </div>
+        </form>
+    </div> <!-- /.add-yourself-->
+    <div class="medium-5 large-5 columns section imp-points">
+        <ul class="form-points">
+            <li class="list">Santa doesn't like incorrect emails. A confirmation link will be sent to you for verification.</li>
+            <li class="list">Only one entry per email. Once submitted, no changes are allowed</li>
+            <li class="list">Enter some realistic wishlist. Don't ask for paid trip to Europe or Xbox from Santa :P</li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="footer">
+    <small class="sign-off">Built for Christmas 2014</small>
+</div>

@@ -20,16 +20,10 @@
     "co": "^4.0.0",
     "co-express": "^1.0.0",
     "compression": "^1.2.1",
-    "connect-flash": "^0.1.1",
-    "connect-mongo": "^0.4.1",
     "express": "^4.10.4",
     "express-handlebars": "^1.1.0",
-    "express-session": "^1.9.2",
     "lodash": "^2.4.1",
     "mongojs": "^0.17.0",
-    "passport": "^0.2.1",
-    "passport-facebook": "^1.0.3",
-    "passport-twitter": "^1.0.2",
     "validator": "^3.22.1"
   }
 }

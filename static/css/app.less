@@ -3,3 +3,145 @@
 
 // Foundation
 @import (inline) '../thirdparty/foundation/css/foundation.css';
+
+/***************************\
+        Variables
+\***************************/
+
+@banner-red: #CD212A;
+@primary-font: 'Varela Round', sans-serif;
+@secondary-font: 'Lato', sans-serif;
+
+/***************************\
+        Mixins
+\***************************/
+
+.fontsize(@value) {
+    font-size: ~"@{value}px";
+}
+
+/***************************\
+        Home Page
+\***************************/
+
+.banner {
+    width: 100%;
+    max-width: 100%;
+    height: 500px;
+    background-color: @banner-red;
+    background-image: url('../img/asfalt-light.png');
+    background-repeat: repeat;
+
+    .headline {
+        margin: 100px auto;
+        font-family: @primary-font;
+        .fontsize(62);
+        color: #fff;
+        text-align: center;
+    }
+
+    .action {
+        margin-top: 150px;
+        text-align: center;
+    }
+
+    .cta {
+        .fontsize(36);
+        color: @banner-red;
+        background-color: #fff;
+    }
+}
+
+.section {
+    margin-top: 30px;
+
+    &-title {
+        .fontsize(36);
+        font-family: @primary-font;
+        color: @banner-red;
+        text-align: center;
+    }
+}
+
+.how-it-works {
+    .step {
+        padding: 30px;
+
+        &-img{
+            display: block;
+            margin: 0 auto;
+            width: 100px;
+            height: 100px;
+        }
+
+        &-title {
+            font-family: @primary-font;
+            color: @banner-red;
+            text-align: center;
+        }
+
+        &-content {
+            font-family: @secondary-font;
+        }
+    }
+}
+
+.add-yourself {
+    border-right: 1px solid #ccc;
+
+    .registration-form {
+        .custom-input, .custom-prefix {
+            height: 45px;
+            .fontsize(20);
+            line-height: 45px;
+            text-align: center;
+        }
+
+        .submit {
+            margin-top: 30px;
+            font-weight: bold;
+            color: @banner-red;
+            text-transform: uppercase;
+            background-color: #fff;
+            border: 3px solid @banner-red;
+            -webkit-transition: all 0.3s ease-in;
+            -moz-transition: all 0.3s ease-in;
+            -o-transition: all 0.3s ease-in;
+            transition: all 0.3s ease-in;
+
+
+            &:hover {
+                color: #fff;
+                background-color: @banner-red;
+            }
+        }
+    }
+}
+
+
+.imp-points {
+
+    .form-points {
+        margin-top: 45px;
+        list-style-type: square;
+
+        .list {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+.footer {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: @banner-red;
+    background-image: url('../img/asfalt-light.png');
+    background-repeat: repeat;
+
+    .sign-off {
+        display: block;
+        .fontsize(12);
+        color: #fff;
+        text-align: center;
+    }
+}

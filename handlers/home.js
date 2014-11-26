@@ -1,17 +1,16 @@
 var express   = require('express'),
-    router    = express.Router(),
-    wrap      = require('co-express');
+    router    = express.Router();
 
-router.get('/', wrap(function* (req, res, next) {
+router.get('/', function (req, res, next) {
     try {
         var pageData = {
-            'title': 'home'
+            'title': 'MySanta - Everyone has their own Santa'
         };
 
         res.render('home', pageData);
     } catch (e) {
         return next(e);
     }
-}));
+});
 
 module.exports = router;

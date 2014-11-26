@@ -1,10 +1,6 @@
 var express     = require('express'),
     exphbs      = require('express-handlebars'),
     cfg         = require('./cfg'),
-    session     = require('express-session'),
-    flash       = require('connect-flash'),
-    MongoStore  = require('connect-mongo')(session),
-    passport    = require('passport'),
     compress    = require('compression'),
     app         = express();
 
@@ -16,50 +12,12 @@ app.use(compress());
 app.use('/static', express.static(cfg.paths.static));
 
 
-// Use session
-app.use(session({
-    secret           : cfg.web.session.secret,
-    resave           : true,
-    saveUninitialized: true,
-    store            : new MongoStore({
-        url: cfg.web.session.mongo
-    })
-}));
-
-// Use session flash vars
-app.use(flash());
-
-// Session user mods
-app.use(function (req, res, next) {
-    Object.defineProperties(req, {
-        'user': {
-            'get': function () {
-                if (req.session) {
-                    return req.session._user;
-                }
-
-                return null;
-            },
-
-            'set': function (user) {
-                req.session._user = user;
-            }
-        }
-    });
-
-    next();
-});
-
 // Storing session in locals
 app.use(function(req, res, next){
-    res.locals.user = req.user;
     res.locals.version = require('./package.json').version;
     next();
 });
 
-// Use passport
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Set views dir
 app.set('views', cfg.paths.templates);
@@ -68,10 +26,10 @@ app.set('views', cfg.paths.templates);
 var hbs = exphbs.create({
     layoutsDir:  cfg.paths.templates,
     defaultLayout: 'master',
+    partialsDir: [
+        cfg.paths.templates + '/partials/'
+    ]
     // helpers: require('./helpers/view').helpers,
-    // partialsDir: [
-    //     cfg.paths.templates + '/partials/'
-    // ]
 });
 
 // Initialize engine
@@ -83,8 +41,6 @@ app.set('view engine', 'handlebars');
 // common routes
 require('./routes')(app);
 
-// login and logout
-//app.use(require('./handlers/login')(cfg));
 
 // register 500
 app.use(function (err, req, res, next) {
@@ -108,13 +64,13 @@ app.use(function (err, req, res, next) {
     if (err.status === 400) {
         res.status(400);
         return res.render('errors/400', {
-            'title': 'Bad data - Grallo'
+            'title': 'Bad data'
         });
     }
 
     res.status(500);
     res.render('errors/500', {
-        'title': 'Something went wrong - Grallo'
+        'title': 'Something went wrong'
     });
 });
 
@@ -122,7 +78,7 @@ app.use(function (err, req, res, next) {
 app.use(function (req, res) {
     res.status(404);
     res.render('errors/404', {
-        'title': 'Page not found - Grallo'
+        'title': 'Page not found'
     });
 });
 

@@ -3,36 +3,38 @@ var cfg                 = require('../cfg'),
     express             = require('express'),
     router              = express.Router(),
     passport            = require('passport'),
-    FacebookStrategy    = require('passport-facebook').Strategy,
+    TwitterStrategy     = require('passport-twitter').Strategy,
+    userModel           = require('../models/users'),
     wrap                = require('co-express');
 
-
-passport.use(new FacebookStrategy({
-        clientID    : cfg.facebook.appId,
-        clientSecret: cfg.facebook.appSecret,
-        callbackURL : cfg.baseurl + cfg.facebook.cbUrl,
-        enableProof : cfg.facebook.enableProof
-    }, co(validateFbUser)));
-
-router.get('/facebook', passport.authenticate('facebook', { scope : 'email'}));
-
-router.get('/facebook/cb', function (req, res, next) {
-    passport.authenticate('facebook', function (err, result) {
-        if (err) {
-            return next(err);
-        }
-
-        console.log(result);
-
-    })(req, res, next);
+passport.serializeUser(function(user, done) {
+    done(null, user);
 });
 
-function validateFbUser(token, refreshToken, profile) {
-    return {
-        token: token,
-        refreshToken: refreshToken,
-        profile: profile
-    };
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
+});
+
+passport.use(new TwitterStrategy({
+    consumerKey: cfg.twitter.consumerKey,
+    consumerSecret: cfg.twitter.consumerSecret,
+    callbackURL: cfg.twitter.cbUrl
+}, co(twAuth)));
+
+function* twAuth(token, refreshToken, profile, done) {
+    var twitterData = profile._json;
+    var existingUser  = yield userModel.Repo.getBySocialId(twitterData.id, 'twitter');
+    done(null, profile);
 }
+
+router.get('/twitter', passport.authenticate('twitter'));
+
+router.get('/twitter/cb',
+    passport.authenticate('twitter', { failureRedirect: '/login' }),
+    function(req, res) {
+        console.log('scuessss');
+        res.redirect('/');
+});
+
 
 module.exports = router;

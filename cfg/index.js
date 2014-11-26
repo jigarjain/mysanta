@@ -19,6 +19,11 @@ var cfg = {
         'appSecret'   : '44e426334f609301cd876cd300f24017',
         'cbUrl'       : '/auth/facebook/cb',
         'enableProof' : false
+    },
+    'twitter': {
+        'consumerKey'       : 'iXPxfX1jrbZXhWzv1KiQXRXdM',
+        'consumerSecret'   : 'qUZ6IArQIqaDekalvllI5BD0BSOsremcIE5W1r0VEbuPpow1uD',
+        'cbUrl'       : '/auth/twitter/cb'
     }
 };
 

@@ -1,15 +1,23 @@
-var express     = require('express'),
-    exphbs      = require('express-handlebars'),
+var bodyParser = require('body-parser'),
     cfg         = require('./cfg'),
     compress    = require('compression'),
+    express     = require('express'),
+    exphbs      = require('express-handlebars'),
     app         = express();
 
 
 // Use gzip compression
 app.use(compress());
 
+
 // serve static files
 app.use('/static', express.static(cfg.paths.static));
+
+
+// Parse POST data
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 
 // Storing session in locals
@@ -22,6 +30,7 @@ app.use(function(req, res, next){
 // Set views dir
 app.set('views', cfg.paths.templates);
 
+
 // Create Express handlebar instance
 var hbs = exphbs.create({
     layoutsDir:  cfg.paths.templates,
@@ -32,11 +41,14 @@ var hbs = exphbs.create({
     // helpers: require('./helpers/view').helpers,
 });
 
+
 // Initialize engine
 app.engine('handlebars', hbs.engine);
 
+
 // Set engine
 app.set('view engine', 'handlebars');
+
 
 // common routes
 require('./routes')(app);

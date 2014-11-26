@@ -13,7 +13,13 @@ var cfg = {
             'secret': 'mysanta2514',
             'mongo' : 'mongodb://127.0.0.1/sess_mysanta'
         },
-    }
+    },
+    'mandrill': {
+        'apiKey': 'DvA8gIyPNGPqKEhISN1i7Q',
+        'email': 'mysantaweb@gmail.com',
+        'name': 'MySanta.in'
+    },
+
 };
 
 if (process.env.NODE_ENV) {

@@ -19,5 +19,9 @@
   "strict"   : false,
   "esnext"   : true,
   "node"     : true,
-  "globals"  : {}
+  "globals"  : {
+    "$"        : true,
+    "window"   : true,
+    "document" : true
+  }
 }

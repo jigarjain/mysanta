@@ -23,6 +23,7 @@
     "express": "^4.10.4",
     "express-handlebars": "^1.1.0",
     "lodash": "^2.4.1",
+    "mandrill-api": "^1.0.41",
     "mongojs": "^0.17.0",
     "validator": "^3.22.1"
   }

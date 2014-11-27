@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 var cfg = {
-    'baseurl'     : process.env.BASEURL || 'http://localhost:5060',
+    'baseurl'     : process.env.BASEURL || 'http://mysanta.in',
     'mongo'       : 'mysanta',
     'paths': {
         'static'   : __dirname + '/../static',

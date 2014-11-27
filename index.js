@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({
 
 // Storing session in locals
 app.use(function(req, res, next){
+    res.locals.google = cfg.google;
     res.locals.version = require('./package.json').version;
     next();
 });

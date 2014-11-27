@@ -17,8 +17,14 @@
 \***************************/
 
 .fontsize(@value) {
+    @pxValue: @value;
     font-size: ~"@{value}px";
 }
+
+/***************************\
+        Common
+\***************************/
+
 
 /***************************\
         Home Page
@@ -27,28 +33,28 @@
 .banner {
     width: 100%;
     max-width: 100%;
-    height: 500px;
+    padding: 75px 0;
     background-color: @banner-red;
     background-image: url('../img/asfalt-light.png');
     background-repeat: repeat;
 
     .headline {
-        margin: 100px auto;
         font-family: @primary-font;
-        .fontsize(62);
+        .fontsize(58);
+        line-height: 150%;
         color: #fff;
         text-align: center;
     }
 
-    .action {
-        margin-top: 150px;
+    .subtitle {
+        .fontsize(32);
+        line-height: 300%;
+        color: #fff;
         text-align: center;
     }
 
-    .cta {
-        .fontsize(36);
-        color: @banner-red;
-        background-color: #fff;
+    .count {
+        .fontsize(42);
     }
 }
 
@@ -91,14 +97,20 @@
 
     .registration-form {
         .custom-input, .custom-prefix {
-            height: 45px;
-            .fontsize(20);
-            line-height: 45px;
+            height: 40px;
+            font-family: @secondary-font;
+            .fontsize(18);
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .error-msg {
+            color: @banner-red;
             text-align: center;
         }
 
         .submit {
-            margin-top: 30px;
+            font-family: @secondary-font;
             font-weight: bold;
             color: @banner-red;
             text-transform: uppercase;
@@ -127,6 +139,7 @@
 
         .list {
             margin-bottom: 15px;
+            font-family: @secondary-font;
         }
     }
 }
@@ -140,8 +153,34 @@
 
     .sign-off {
         display: block;
+        font-family: @secondary-font;
         .fontsize(12);
         color: #fff;
         text-align: center;
+    }
+}
+
+
+/***************************\
+        Confirm email
+\***************************/
+
+.confirm-email, .error-page {
+    margin: 100px auto;
+    text-align: center;
+
+    &-img {
+        display: block;
+        margin: 15px auto;
+        width: 200px;
+    }
+
+    .title {
+        font-family: @primary-font;
+        color: @banner-red
+    }
+
+    .content {
+        font-family: @secondary-font;
     }
 }

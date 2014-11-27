@@ -7,13 +7,17 @@ var cfg         = require('../cfg'),
     router      = express.Router(),
     wrap        = require('co-express');
 
-router.get('/', function (req, res) {
+router.get('/', wrap(function* (req, res) {
+
+    var allEntries = yield entryModel.Repo.getAll();
+
     var pageData = {
-        'title': 'MySanta - Everyone has their own Santa'
+        'title': 'MySanta - Meet your santa here',
+        'totalEntries': 134 + allEntries.length
     };
 
     res.render('home', pageData);
-});
+}));
 
 router.post('/submit', wrap(function* (req, res, next) {
     try {
@@ -74,13 +78,13 @@ router.post('/submit', wrap(function* (req, res, next) {
         // Else add the entry
         if (existingEntry && existingEntry.emailVerified) {
             output.code = 0;
-            output.error = 'Email already exist. Please select other email';
+            output.error = 'Email already exist. Try using other email address';
             res.jsonp(output);
             return;
         } else {
             if (existingEntry && ! existingEntry.emailVerified) {
-                delete entry._id;
                 delete entry.createTime;
+                entry._id = existingEntry._id;
                 var updatedEntry = _.extend(existingEntry, entry);
                 yield entryModel.Repo.update(updatedEntry);
             } else {
@@ -93,17 +97,24 @@ router.post('/submit', wrap(function* (req, res, next) {
 
         // redirect to confirm email page
         output.code = 1;
-        output.url = cfg.baseurl + '/confirmEmail';
+        output.url = cfg.baseurl + '/confirmEmail?email=' + entry.email ;
         res.jsonp(output);
     } catch (e) {
+        var output = {
+            'code': 0,
+            'error': 'Something went wrong. Try again',
+        };
+        res.jsonp(output);
         next(e);
     }
 }));
 
 
 router.get('/confirmEmail', function (req, res) {
+    var email = req.query.email;
     var pageData = {
-        'title': 'Confirm your email'
+        'title': 'Confirm your email',
+        'email': email
     };
 
     res.render('confirmEmail', pageData);
@@ -116,8 +127,10 @@ router.get('/confirmEmail/:id', wrap(function* (req, res, next) {
 
         var entry = yield entryModel.Repo.getById(entryId);
 
+        console.log(entry);
         if (! entry) {
             next();
+            return;
         }
 
         entry.emailVerified = true;

@@ -19,7 +19,9 @@ var cfg = {
         'email': 'mysantaweb@gmail.com',
         'name': 'MySanta.in'
     },
-
+    'google': {
+        'trackingId': 'UA-57164756-1'
+    }
 };
 
 if (process.env.NODE_ENV) {

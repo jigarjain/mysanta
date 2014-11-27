@@ -92,6 +92,22 @@ module.exports = function () {
         });
     };
 
+    Repo.getAll = function () {
+        return new Promise(function (resolve, reject) {
+            coll.find({}, function (err, docs) {
+                if (err) {
+                    reject(err, null);
+                }
+
+                var results = _.collect(docs, function (doc) {
+                    return _.create(new Entry(), doc);
+                });
+
+                resolve(results);
+            });
+        });
+    };
+
 
     return {
         'Entry' : Entry,

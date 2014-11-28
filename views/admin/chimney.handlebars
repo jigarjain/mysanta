@@ -1,0 +1,36 @@
+<div class="all-entries section">
+    <div class="row">
+        <div class="small-12 columns">
+            <h3>Total Entries - {{allEntries.length}}</h3>
+            <table class="small-12">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>City</th>
+                        <th>Wishlist</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each allEntries}}
+                        <tr data-id="{{_id}}">
+                            <td>{{name}}</td>
+                            <td>
+                                {{email}} <br>
+                                {{#if emailVerified}}
+                                    (verified)
+                                {{/if}}
+                            </td>
+                            <td>{{city}}</td>
+                            <td>
+                                {{#each wishlist}}
+                                    {{this}} <br>
+                                {{/each}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> <!-- /.all-entries -->

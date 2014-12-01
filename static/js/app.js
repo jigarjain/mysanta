@@ -6,7 +6,6 @@ $(document).ready(function () {
         var form = $('.registration-form');
         var formData = form.serialize();
 
-        console.log(formData);
         $.ajax({
             url: form.attr('action'),
             method: 'POST',
@@ -68,10 +67,60 @@ $(document).ready(function () {
             };
         })($);
 
-        $('.banner .count').countTo({
-            from: 0,
-            to: $('.banner .count').data('count'),
-            speed: 2000,
-            refreshInterval: 50
-        });
+    $('.banner .count').countTo({
+        from: 0,
+        to: $('.banner .count').data('count'),
+        speed: 2000,
+        refreshInterval: 50
+    });
+
+    if ($('.social-share').length) {
+        var sTimeout = $('.social-share').data('timeout');
+
+        // Social media
+        setTimeout(function(){
+            // Fb
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+
+                js = d.createElement(s);
+                js.id = id;
+                js.src = '//connect.facebook.net/en_IN/all.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : '754431431295099',                        // App ID from the app dashboard
+                    status     : true,                             // Check Facebook Login status
+                    xfbml      : true                              // Look for social plugins on the page
+                });
+            };
+
+            //Twitter
+            (function(d, s, id) {
+                var js, fjs= d.getElementsByTagName(s)[0];
+                if(!d.getElementById(id)){
+                    js= d.createElement(s);
+                    js.id= id;
+                    js.src= 'https://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js,fjs);
+                }
+            }(document, 'script' , 'twitter-wjs' ));
+
+            //Google Plus
+            (function() {
+                var po = document.createElement('script');
+                po.type = 'text/javascript';
+                po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(po, s);
+            })();
+        }, sTimeout);
+    }
+
 });

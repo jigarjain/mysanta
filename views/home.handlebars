@@ -45,7 +45,14 @@
                     <input type="email" name="email" autocomplete="off" placeholder="Your email" required class="radius custom-input">
                 </div>
                 <div class="large-12 columns">
-                    <input type="text" name="city" autocomplete="off" placeholder="Your current city" required class="radius custom-input">
+                    <label class="city-label"><strong>Select City:</strong></label>
+                    <label class="city-label"><input type="radio" name="city" value="Mumbai">Mumbai</label>
+                    <label class="city-label"><input type="radio" name="city" value="Delhi">Delhi</label>
+                    <label class="city-label"><input type="radio" name="city" value="Bangalore">Bangalore</label>
+                    <label class="city-label"><input type="radio" name="city" value="Other">Other</label>
+                </div>
+                <div class="large-12 columns">
+                    <textarea name="address" autocomplete="off" placeholder="Address where you would your Santa to deliver your gift" required class="radius custom-input address"></textarea>
                 </div>
                 <div class="large-12 columns">
                     <div class="row collapse prefix-radius">
@@ -89,6 +96,7 @@
             <li class="list">Santa doesn't like incorrect emails. A confirmation link will be sent to you for verification.</li>
             <li class="list">Only one entry per email. Once submitted, no changes are allowed</li>
             <li class="list">Enter some realistic wishlist. Don't ask for paid trip to Europe or Xbox from Santa :P</li>
+            <li class="list">And remember, only a good Santa can be a good Santee ;)</li>
         </ul>
     </div>
 </div>

@@ -19,6 +19,8 @@ module.exports = function () {
 
         this.city = null;
 
+        this.address = null;
+
         this.wishlist = [];
 
         this.createTime = null;

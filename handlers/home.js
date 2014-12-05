@@ -60,6 +60,16 @@ router.post('/submit', wrap(function* (req, res, next) {
             entry.city = input.city;
         }
 
+        // validate address
+        if (! validator.isLength(input.address, 3)) {
+            output.code = 0;
+            output.error = 'Enter a proper address';
+            res.jsonp(output);
+            return;
+        } else {
+            entry.address = input.address;
+        }
+
         // validate wishlist
         if (! (input.wishlist && input.wishlist.length)) {
             output.code = 0;
@@ -127,7 +137,6 @@ router.get('/confirmEmail/:id', wrap(function* (req, res, next) {
 
         var entry = yield entryModel.Repo.getById(entryId);
 
-        console.log(entry);
         if (! entry) {
             next();
             return;

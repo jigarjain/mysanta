@@ -7,16 +7,19 @@ var cfg         = require('../cfg'),
     router      = express.Router(),
     wrap        = require('co-express');
 
-router.get('/', wrap(function* (req, res) {
+router.get('/', wrap(function* (req, res, next) {
+    try {
+        var allEntries = yield entryModel.Repo.getAll();
 
-    var allEntries = yield entryModel.Repo.getAll();
+        var pageData = {
+            'title': 'MySanta - Meet your santa here',
+            'totalEntries': 134 + allEntries.length
+        };
 
-    var pageData = {
-        'title': 'MySanta - Meet your santa here',
-        'totalEntries': 134 + allEntries.length
-    };
-
-    res.render('home', pageData);
+        res.render('home', pageData);
+    }  catch (e) {
+        next(e);
+    }
 }));
 
 router.post('/submit', wrap(function* (req, res, next) {
@@ -120,14 +123,18 @@ router.post('/submit', wrap(function* (req, res, next) {
 }));
 
 
-router.get('/confirmEmail', function (req, res) {
-    var email = req.query.email;
-    var pageData = {
-        'title': 'Confirm your email',
-        'email': email
-    };
+router.get('/confirmEmail', function (req, res, next) {
+    try {
+        var email = req.query.email;
+        var pageData = {
+            'title': 'Confirm your email',
+            'email': email
+        };
 
-    res.render('confirmEmail', pageData);
+        res.render('confirmEmail', pageData);
+    } catch (e) {
+        next(e);
+    }
 });
 
 

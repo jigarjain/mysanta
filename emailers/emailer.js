@@ -29,38 +29,45 @@ var cfg            = require('../cfg'),
     app.set('view engine', 'handlebars');
 
 function sendConfirmationEmail(entry) {
-    var data = _.extend(entry, {
-        'baseurl': cfg.baseurl,
-        'confirmLink': cfg.baseurl + '/confirmEmail/' + entry._id
-    });
-    app.render('emailers/confirmationEmail', data, function(err, html) {
-        var subject = 'Confirm your email address';
-        var to = entry.email;
-        sendEmail(html, subject, to);
-    });
-
+    try {
+        var data = _.extend(entry, {
+            'baseurl': cfg.baseurl,
+            'confirmLink': cfg.baseurl + '/confirmEmail/' + entry._id
+        });
+        app.render('emailers/confirmationEmail', data, function(err, html) {
+            var subject = 'Confirm your email address';
+            var to = entry.email;
+            sendEmail(html, subject, to);
+        });
+    } catch (e) {
+        console.log('New Error caught in mail:' + e);
+    }
 }
 
 function sendEmail(html, subject, to) {
-    var message = {
-        'html': html,
-        'subject': subject,
-        'from_email': cfg.mandrill.email,
-        'from_name': cfg.mandrill.name,
-        'to': [
-            {
-                'email': to,
-                'type': 'to'
-            }
-        ]
-    };
+    try {
+        var message = {
+            'html': html,
+            'subject': subject,
+            'from_email': cfg.mandrill.email,
+            'from_name': cfg.mandrill.name,
+            'to': [
+                {
+                    'email': to,
+                    'type': 'to'
+                }
+            ]
+        };
 
 
-    mandrillClient.messages.send({'message': message}, function(result) {
-        console.log(result);
-    }, function(e) {
-        console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-    });
+        mandrillClient.messages.send({'message': message}, function(result) {
+            console.log(result);
+        }, function(e) {
+            console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        });
+    } catch (e) {
+        console.log('New Error caught in mail 2nd block:' + e);
+    }
 }
 
 module.exports = {

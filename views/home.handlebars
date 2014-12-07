@@ -33,9 +33,9 @@
     </div>
 </div> <!-- /.how-it-works -->
 
-<div class="row">
-    <div class="medium-5 large-7 columns section add-yourself">
-        <h3 class="section-title text-left">Simply register below</h3>
+<div class="row section">
+    <h3 class="section-title">Simply register below</h3>
+    <div class="medium-5 large-7 columns add-yourself">
         <form method="post" action="/submit" class="registration-form">
             <div class="row">
                 <div class="large-12 columns">
@@ -56,31 +56,41 @@
                 </div>
                 <div class="large-12 columns">
                     <div class="row collapse prefix-radius">
-                        <div class="small-4 columns">
+                        <div class="small-3 columns">
                             <span class="prefix custom-prefix">Wishlist #1</span>
                         </div>
-                        <div class="small-8 columns">
+                        <div class="small-9 columns">
                             <input type="text" name="wishlist[]" maxlength="100" autocomplete="off" placeholder="e.g. Game of thrones book series" required class="custom-input">
                         </div>
                     </div>
                 </div>
                 <div class="large-12 columns">
                     <div class="row collapse prefix-radius">
-                        <div class="small-4 columns">
+                        <div class="small-3 columns">
                             <span class="prefix custom-prefix">Wishlist #2</span>
                         </div>
-                        <div class="small-8 columns">
+                        <div class="small-9 columns">
                             <input type="text" name="wishlist[]" maxlength="100" autocomplete="off" placeholder="e.g. Some comic tshirt" class="custom-input">
                         </div>
                     </div>
                 </div>
                 <div class="large-12 columns">
                     <div class="row collapse prefix-radius">
-                        <div class="small-4 columns">
+                        <div class="small-3 columns">
                             <span class="prefix custom-prefix">Wishlist #3</span>
                         </div>
-                        <div class="small-8 columns">
+                        <div class="small-9 columns">
                             <input type="text" name="wishlist[]" maxlength="100" autocomplete="off" placeholder="e.g. Hershey's Chocolates" class="custom-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-2 columns">
+                            <span class="prefix custom-prefix">@</span>
+                        </div>
+                        <div class="small-10 columns">
+                            <input type="text" name="twitter" value="{{formData.twitter}}" maxlength="100" autocomplete="off" placeholder="Your twitter handle" class="custom-input">
                         </div>
                     </div>
                 </div>
@@ -91,7 +101,7 @@
             </div>
         </form>
     </div> <!-- /.add-yourself-->
-    <div class="medium-5 large-5 columns section imp-points">
+    <div class="medium-5 large-5 columns imp-points">
         <ul class="form-points">
             <li class="list">Santa doesn't like incorrect emails. A confirmation link will be sent to you for verification.</li>
             <li class="list">Only one entry per email. Once submitted, no changes are allowed</li>

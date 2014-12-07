@@ -38,8 +38,8 @@ var hbs = exphbs.create({
     defaultLayout: 'master',
     partialsDir: [
         cfg.paths.templates + '/partials/'
-    ]
-    // helpers: require('./helpers/view').helpers,
+    ],
+    helpers: require('./helpers/view'),
 });
 
 

@@ -20,6 +20,26 @@ $(document).ready(function () {
         });
     });
 
+    $('.update-form').submit(function (e) {
+        e.preventDefault();
+        $('.error-msg').html('Submitting..');
+        var form = $('.update-form');
+        var formData = form.serialize();
+
+        $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            dataType: 'json',
+            data: formData
+        }).done(function(resp) {
+            if(resp.code === 1) {
+                window.location.href = resp.url;
+            } else {
+                $('.error-msg').html(resp.error);
+            }
+        });
+    });
+
     (function($) {
             $.fn.countTo = function(options) {
                 // merge the default plugin settings with the custom options

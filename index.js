@@ -1,13 +1,13 @@
 var bodyParser = require('body-parser'),
     cfg         = require('./cfg'),
-    compress    = require('compression'),
+//    compress    = require('compression'),
     express     = require('express'),
     exphbs      = require('express-handlebars'),
     app         = express();
 
 
 // Use gzip compression
-app.use(compress());
+//app.use(compress());
 
 
 // serve static files

@@ -17,15 +17,22 @@ module.exports = function () {
 
         this.emailVerified = false;
 
+        this.gender = null;
+
         this.city = null;
 
         this.address = null;
 
         this.wishlist = [];
 
+        this.twitter = null;
+
         this.createTime = null;
 
         this.updateTime = null;
+
+        this.updated = false;
+
     }
 
 

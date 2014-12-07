@@ -83,6 +83,11 @@ router.post('/submit', wrap(function* (req, res, next) {
             entry.wishlist = input.wishlist;
         }
 
+        // Save twitter handle
+        if (input.twitter) {
+            entry.twitter = input.twitter;
+        }
+
         // save input
         var existingEntry = yield entryModel.Repo.getByEmail(entry.email);
 
@@ -158,5 +163,129 @@ router.get('/confirmEmail/:id', wrap(function* (req, res, next) {
     }
 
 }));
+
+router.get('/entry/update-successful', function (req, res, next) {
+    try {
+        var pageData = {
+            'title': 'Your entry is successfully updated',
+        };
+
+        res.render('updateSuccessful', pageData);
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.get('/entry/:id/edit', wrap (function* (req, res, next) {
+    try {
+        var entry = yield entryModel.Repo.getById(req.params.id);
+
+        if (! entry || entry.updated) {
+            return next();
+        }
+
+        // Update the email if not verified since he has clicked the link
+        if (! entry.emailVerified) {
+            entry.emailVerified = true;
+            yield entryModel.Repo.update(entry);
+        }
+
+        var pageData = {
+            'title': 'Last chance to update your entry',
+            'formData': _.extend(entry, {
+                'postUrl': cfg.baseurl + '/entry/' + entry._id + '/edit'
+            }),
+            'errors': null
+        };
+
+        res.render('update', pageData);
+    } catch (e) {
+        next(e);
+    }
+}));
+
+
+router.post('/entry/:id/edit', wrap(function* (req, res, next) {
+    try {
+        var output = {
+            'code': null,
+            'error': null,
+            'url': null
+        };
+
+        var input = req.body;
+
+        var entry = yield entryModel.Repo.getById(req.params.id);
+
+        if (! entry) {
+            return next();
+        }
+
+        // validate name
+        if (! validator.isLength(input.name, 1)) {
+            output.code = 0;
+            output.error = 'Enter your correct name';
+            res.jsonp(output);
+            return;
+        } else {
+            entry.name = input.name;
+        }
+
+        // validate city
+        if (! validator.isLength(input.city, 3)) {
+            output.code = 0;
+            output.error = 'Enter a correct city name';
+            res.jsonp(output);
+            return;
+        } else {
+            entry.city = input.city;
+        }
+
+        // validate address
+        if (! validator.isLength(input.address, 3)) {
+            output.code = 0;
+            output.error = 'Enter a proper address or message';
+            res.jsonp(output);
+            return;
+        } else {
+            entry.address = input.address;
+        }
+
+        // validate wishlist
+        if (! (input.wishlist && input.wishlist.length)) {
+            output.code = 0;
+            output.error = 'Mention atleast one wishlist';
+            res.jsonp(output);
+            return;
+        } else {
+            entry.wishlist = input.wishlist;
+        }
+
+        if (input.twitter) {
+            entry.twitter = input.twitter;
+        }
+
+        entry.updated = true;
+
+        // Update the entry
+        yield entryModel.Repo.update(entry);
+
+        // redirect to succesful updation page page
+        output.code = 1;
+        output.url = cfg.baseurl + '/entry/update-successful' ;
+        res.jsonp(output);
+
+    } catch (e) {
+        var output = {
+            'code': 0,
+            'error': 'Something went wrong. Try again later',
+        };
+        res.jsonp(output);
+        next(e);
+    }
+}));
+
+
+
 
 module.exports = router;

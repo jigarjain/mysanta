@@ -1,0 +1,71 @@
+<div class="row update-entry">
+    <div class="small-12 medium-10 large-8 medium-centered large-centered columns">
+        <a href="/"><img src="/static/img/christmas-hut.png" class="logo"></a>
+        <p class="">Santa thinks you might want to change few things you entered earlier :P<br> So another chance to update your entry & add other details which will help your Santa to give you the best gift :D</p>
+        <br>
+        <form method="post" action="{{postUrl}}" class="update-form">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-3 columns">
+                            <span class="prefix">Name</span>
+                        </div>
+                        <div class="small-9 columns">
+                            <input type="text" name="name" value="{{formData.name}}" maxlength="120" autocomplete="off" placeholder="Your full name" required class="radius custom-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-3 columns">
+                            <span class="prefix">City</span>
+                        </div>
+                        <div class="small-9 columns">
+                            <input type="text" name="city" value="{{formData.city}}" maxlength="120" autocomplete="off" placeholder="Your City" required class="radius custom-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="large-12 columns">
+                    <label><strong>Address</strong></label>
+                    <textarea name="address" autocomplete="off" placeholder="Address where you would your Santa to deliver your gift" required class="radius custom-input address">{{formData.address}}</textarea>
+                </div>
+
+                {{#each formData.wishlist}}
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-3 columns">
+                            <span class="prefix custom-prefix">Wishlist #{{plusOne @index}}</span>
+                        </div>
+                        <div class="small-9 columns">
+                            <input type="text" name="wishlist[]" value="{{this}}" maxlength="100" autocomplete="off" placeholder="e.g. Game of thrones book series" class="custom-input">
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-2 columns">
+                            <span class="prefix custom-prefix">@</span>
+                        </div>
+                        <div class="small-10 columns">
+                            <input type="text" name="twitter" value="{{formData.twitter}}" maxlength="100" autocomplete="off" placeholder="Your twitter handle" class="custom-input">
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <p class="info-text">Your details will ONLY be shared with your assigned secret santa & no one else. If you are uncomfortable in sharing any details then you can always let your Santa contact you. But it will take the fun away :)</p>
+                <p class="error-msg">&nbsp;</p>
+                <div class="small-12 columns text-center">
+                    <input type="submit" value="Submit" class="button radius submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+    <small class="sign-off">Built for Christmas 2014</small>
+</div>

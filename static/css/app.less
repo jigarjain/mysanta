@@ -21,6 +21,37 @@
     font-size: ~"@{value}px";
 }
 
+.btn {
+    font-family: @secondary-font;
+    font-weight: bold;
+    color: @banner-red;
+    text-transform: uppercase;
+    background-color: #fff;
+    border: 3px solid @banner-red;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+
+
+    &:hover, &:focus {
+        color: #fff;
+        background-color: @banner-red;
+    }
+}
+
+/***************************\
+        Common
+\***************************/
+
+.submit {
+    .btn();
+}
+
+.error-msg {
+    color: @banner-red;
+    text-align: center;
+}
 
 /***************************\
         Home Page
@@ -90,7 +121,7 @@
 }
 
 .add-yourself {
-    border-right: 1px solid #ccc;
+    margin-top: 30px;
 
     .registration-form {
         .custom-input, .custom-prefix {
@@ -116,38 +147,14 @@
         .address {
             height: 100px;
         }
-
-        .error-msg {
-            color: @banner-red;
-            text-align: center;
-        }
-
-        .submit {
-            font-family: @secondary-font;
-            font-weight: bold;
-            color: @banner-red;
-            text-transform: uppercase;
-            background-color: #fff;
-            border: 3px solid @banner-red;
-            -webkit-transition: all 0.3s ease-in;
-            -moz-transition: all 0.3s ease-in;
-            -o-transition: all 0.3s ease-in;
-            transition: all 0.3s ease-in;
-
-
-            &:hover {
-                color: #fff;
-                background-color: @banner-red;
-            }
-        }
     }
 }
 
 
 .imp-points {
+    margin-top: 30px;
 
     .form-points {
-        margin-top: 45px;
         list-style-type: square;
 
         .list {
@@ -188,7 +195,7 @@
 
 
 /***************************\
-        Confirm email
+    Internal static pages
 \***************************/
 
 .confirm-email, .error-page {
@@ -208,5 +215,25 @@
 
     .content {
         font-family: @secondary-font;
+    }
+}
+
+/***************************\
+        Update page
+\***************************/
+
+.update-entry {
+
+    .logo {
+        display: block;
+        margin: 50px auto;
+        width: 100px;
+    }
+
+    .info-text {
+        margin: 30px auto;
+        padding: 10px;
+        .fontsize(12);
+        line-height: 150%;
     }
 }

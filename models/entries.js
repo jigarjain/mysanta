@@ -117,6 +117,22 @@ module.exports = function () {
         });
     };
 
+    Repo.remove = function (id) {
+        return new Promise(function (resolve, reject) {
+            coll.remove({
+                '_id': db.ObjectId(id)
+            }, {
+                'justOne': true
+            }, function (err, res) {
+                if (err) {
+                    reject(err, null);
+                }
+
+                resolve(res);
+            });
+        });
+    };
+
 
     return {
         'Entry' : Entry,

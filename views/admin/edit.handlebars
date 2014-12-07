@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="small-12 column">
+        <h1>Form for {{formData.name}}</h1>
+        <form method="post">
+            <div class="row">
+                <div class="large-12 columns">
+                    <input type="text" name="name" value="{{formData.name}}" maxlength="120" autocomplete="off" required class="radius">
+                </div>
+
+                <div class="large-12 columns">
+                    <input type="email" name="email" value="{{formData.email}}" autocomplete="off" placeholder="Your email" required class="radius">
+                </div>
+
+                <div class="large-12 columns">
+                    <input type="radio" name="gender" value="male" {{renderRadioCheck formData.gender 'male'}}> Male
+                    <input type="radio" name="gender" value="female" {{renderRadioCheck formData.gender 'female'}}> Female
+                </div>
+
+                <div class="large-12 columns">
+                    <input type="text" name="city" value="{{formData.city}}">
+                </div>
+
+                <div class="large-12 columns">
+                    <textarea name="address" autocomplete="off" placeholder="Address where you would your Santa to deliver your gift" required class="radius address">{{formData.address}}</textarea>
+                </div>
+
+                {{#each formData.wishlist}}
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-3 columns">
+                            <span class="prefix custom-prefix">Wishlist #{{plusOne @index}}</span>
+                        </div>
+                        <div class="small-9 columns">
+                            <input type="text" name="wishlist[]" value="{{this}}" maxlength="100" autocomplete="off" placeholder="e.g. Game of thrones book series" class="custom-input">
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+                <div class="large-12 columns">
+                    <div class="row collapse prefix-radius">
+                        <div class="small-2 columns">
+                            <span class="prefix custom-prefix">@</span>
+                        </div>
+                        <div class="small-10 columns">
+                            <input type="text" name="twitter" value="{{formData.twitter}}" maxlength="100" autocomplete="off" placeholder="Your twitter handle" class="custom-input">
+                        </div>
+                    </div>
+                </div>
+                <p class="error-msg">&nbsp;</p>
+                <div class="large-12 columns text-center">
+                    <input type="submit" value="Submit" class="button radius submit">
+                </div>
+            </div>
+        </form>
+        <br><br><br>
+        <form method="post" action="/admin/chimney/entry/{{formData._id}}/delete">
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+</div>

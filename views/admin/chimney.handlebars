@@ -7,9 +7,10 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Gender</th>
                         <th>City</th>
-                        <th>Address</th>
                         <th>Wishlist</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,12 +23,15 @@
                                     (verified)
                                 {{/if}}
                             </td>
+                            <td>{{gender}}</td>
                             <td>{{city}}</td>
-                            <td>{{address}}</td>
                             <td>
                                 {{#each wishlist}}
                                     {{this}} <br>
                                 {{/each}}
+                            </td>
+                            <td>
+                            <a href="/admin/chimney/entry/{{_id}}/edit">Edit</a>
                             </td>
                         </tr>
                     {{/each}}

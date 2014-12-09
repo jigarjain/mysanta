@@ -1,0 +1,41 @@
+<h1 class="text-center">Total verified entries: {{total}}</h1>
+<div class="row">
+    <div class="small-12 columns">
+        {{#each cities}}
+        <h3>{{@key}} - {{this.length}}</h3>
+        <table class="small-12 sortable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                    <th>Email</th>
+                    <th>Twitter</th>
+                    <th>Address</th>
+                    <th>Wishlist</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each this}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{gender}}</td>
+                    <td>{{city}}</td>
+                    <td>{{twitter}}</td>
+                    <td>{{address}}</td>
+                    <td>
+                        {{#each wishlist}}
+                            {{this}} <br>
+                        {{/each}}
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <br><br><br>
+        <hr>
+        <br><br><br>
+        {{/each}}
+    </div>
+</div>

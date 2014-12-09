@@ -68,4 +68,52 @@ router.post('/chimney/entry/:id/delete', wrap(function* (req, res, next) {
 }));
 
 
+router.get('/chimney/pairing', wrap (function* (req, res, next) {
+    try {
+        var pagedata ={
+            'title': 'Pairings',
+            'total': 0,
+            'cities': {
+                'Mumbai': [],
+                'Bangalore': [],
+                'Delhi': [],
+                'Kolkata': [],
+                'Others': []
+            }
+        };
+
+        var allEntries = yield entryModel.Repo.getAll();
+
+        // Filter only those whose email is verified
+        allEntries = _.filter(allEntries, function (e) {
+            return e.emailVerified;
+        });
+
+        pagedata.total = allEntries.length;
+
+
+        // Group based on cities
+        var cities = ['Mumbai', 'Bangalore', 'Delhi', 'Kolkata'];
+
+        _.each(allEntries, function (entry) {
+            var exist = false;
+            for (var i = 0; i < cities.length; i++) {
+                if (entry.city.toLowerCase().trim() === cities[i].toLowerCase()) {
+                    pagedata.cities[cities[i]].push(entry);
+                    exist = true;
+                    break;
+                }
+            }
+
+            if (! exist) {
+                pagedata.cities.Others.push(entry);
+            }
+        });
+
+        res.render('admin/pairing', pagedata);
+    } catch (e) {
+        next(e);
+    }
+}));
+
 module.exports = router;

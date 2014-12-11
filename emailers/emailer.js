@@ -44,8 +44,33 @@ function sendConfirmationEmail(entry) {
     }
 }
 
+
+function sendUpdateEntryEmail(entry) {
+    return new Promise(function (resolve, reject) {
+        var data = _.extend(entry, {
+            'baseurl': cfg.baseurl,
+            'updateLink': cfg.baseurl + '/entry/' + entry._id + '/edit'
+        });
+
+        app.render('emailers/updateEntryEmail', data, function(err, html) {
+
+            if (err) {
+                return reject(err);
+            }
+
+            var subject = 'One more chance';
+            var to = entry.email;
+            return sendEmail(html, subject, to)
+                .then(function (result) {
+                    resolve(result);
+                });
+        });
+    });
+}
+
+
 function sendEmail(html, subject, to) {
-    try {
+    return new Promise(function (resolve, reject) {
         var message = {
             'html': html,
             'subject': subject,
@@ -62,14 +87,15 @@ function sendEmail(html, subject, to) {
 
         mandrillClient.messages.send({'message': message}, function(result) {
             console.log(result);
+            resolve(result);
         }, function(e) {
             console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+            reject(e);
         });
-    } catch (e) {
-        console.log('New Error caught in mail 2nd block:' + e);
-    }
+    });
 }
 
 module.exports = {
-    'sendConfirmationEmail': sendConfirmationEmail
+    'sendConfirmationEmail': sendConfirmationEmail,
+    'sendUpdateEntryEmail': sendUpdateEntryEmail,
 };

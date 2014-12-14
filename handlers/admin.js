@@ -1,8 +1,10 @@
-var entryModel  = require('../models/entries')(),
-    express     = require('express'),
-    router      = express.Router(),
-    wrap        = require('co-express'),
-    _           = require('lodash');
+var entryModel    = require('../models/entries')(),
+    express       = require('express'),
+    pairingModel  = require('../models/pairing')(),
+    validator     = require('validator'),
+    router        = express.Router(),
+    wrap          = require('co-express'),
+    _             = require('lodash');
 
 router.get('/chimney', wrap(function* (req, res) {
 
@@ -112,6 +114,65 @@ router.get('/chimney/pairing', wrap (function* (req, res, next) {
 
         res.render('admin/pairing', pagedata);
     } catch (e) {
+        next(e);
+    }
+}));
+
+router.post('/chimney/pairing/add', wrap (function* (req, res, next) {
+    try {
+        var input = req.body;
+        var output = {
+            'code': null,
+            'error': null,
+            'url': null
+        };
+        var pairing = new pairingModel.Pairing();
+
+        // validate santa email
+        if (validator.isEmail(input.santaEmail)) {
+            pairing.santa = yield entryModel.Repo.getByEmail(input.santaEmail);
+
+            if (! pairing.santa) {
+                output.code = 0;
+                output.error = 'Santa email does not exist';
+                res.jsonp(output);
+                return;
+            }
+        } else {
+            output.code = 0;
+            output.error = 'Santa email is incorrect';
+            res.jsonp(output);
+            return;
+        }
+
+        // validate santee email
+        if (validator.isEmail(input.santeeEmail)) {
+            pairing.santee = yield entryModel.Repo.getByEmail(input.santeeEmail);
+
+            if (! pairing.santee) {
+                output.code = 0;
+                output.error = 'Santee email does not exist';
+                res.jsonp(output);
+                return;
+            }
+        } else {
+            output.code = 0;
+            output.error = 'Santee email is incorrect';
+            res.jsonp(output);
+            return;
+        }
+
+        // save the pairing
+        yield pairingModel.Repo.add(pairing);
+
+        output.code = 1;
+        res.jsonp(output);
+    } catch (e) {
+        var output = {
+            'code': 0,
+            'error': 'Something went wrong. Try again',
+        };
+        res.jsonp(output);
         next(e);
     }
 }));

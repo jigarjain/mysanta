@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    $(document).foundation();
+
     $('.registration-form').submit(function (e) {
         e.preventDefault();
         $('.error-msg').html('Submitting..');
@@ -142,5 +144,28 @@ $(document).ready(function () {
             })();
         }, sTimeout);
     }
+
+    // Adding pairing
+    $('.add-pairing').submit(function (e) {
+        e.preventDefault();
+
+        $('.error-msg').html('Submitting..');
+        var form = $('.add-pairing');
+        var formData = form.serialize();
+
+        $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            dataType: 'json',
+            data: formData
+        }).done(function(resp) {
+            if(resp.code === 1) {
+                $('.error-msg').html('Added successfully');
+                form.find('input').val('');
+            } else {
+                $('.error-msg').html(resp.error);
+            }
+        });
+    });
 
 });

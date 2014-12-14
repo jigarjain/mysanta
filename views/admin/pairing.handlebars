@@ -2,7 +2,10 @@
 <div class="row">
     <div class="small-12 columns">
         {{#each cities}}
-        <h3>{{@key}} - {{this.length}}</h3>
+        <div class="clearfix">
+            <h3 class="left">{{@key}} - {{this.length}}</h3>
+            <button type="button" class="button right" data-reveal-id="pairingModal">Add Pairing</button>
+        </div>
         <table class="small-12 sortable">
             <thead>
                 <tr>
@@ -22,6 +25,7 @@
                     <td>{{name}}</td>
                     <td>{{gender}}</td>
                     <td>{{city}}</td>
+                    <td>{{email}}</td>
                     <td>{{twitter}}</td>
                     <td>{{address}}</td>
                     <td>
@@ -39,3 +43,34 @@
         {{/each}}
     </div>
 </div>
+
+<div id="pairingModal" class="reveal-modal small" data-reveal>
+    <h2>Add Pairing</h2>
+    <form method="post" action="/admin/chimney/pairing/add" class="add-pairing">
+        <div class="row">
+            <div class="small-12 columns">
+                <div class="row collapse prefix-radius">
+                    <div class="small-3 columns">
+                        <span class="prefix custom-prefix">Santa's Email:</span>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="email" name="santaEmail" maxlength="100" autocomplete="off" placeholder="Email address of the sender" required class="custom-input">
+                    </div>
+                </div>
+                <div class="row collapse prefix-radius">
+                    <div class="small-3 columns">
+                        <span class="prefix custom-prefix">Santee's Email:</span>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="email" name="santeeEmail" maxlength="100" autocomplete="off" placeholder="Email address of the receiver" required class="custom-input">
+                    </div>
+                </div>
+            </div>
+            <div class="small-12 columns text-center">
+                <p class="error-msg">&nbsp;</p>
+                <button type="submit" class="button">Add</button>
+            </div>
+        </div>
+    </form>
+    <a class="close-reveal-modal">&#215;</a>
+</div> <!-- /.reveal-modal -->

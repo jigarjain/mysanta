@@ -1,0 +1,56 @@
+<html>
+<head></head>
+<body>
+    <div class="email_body" style="margin: 0 auto; width: 80%; min-width: 480px;">
+        <div class="email_logo" style="padding: 15px; color: #fff; text-align: center; background-color:#CD212A;">
+            <a href="{{baseurl}}"><img src="{{baseurl}}/static/img/christmas-hut.png" style="width: 100px;" title="MySanta.in" /></a>
+        </div>
+        <div class="email_container" style="width: 80%; margin: 30px auto 30px auto;">
+            <strong>Hey {{santa.name}},</strong>
+            <p>Finally the email which you have been waiting for :) Below are the details of your Santee which they have shared with us.</p>
+            <table style="width: 100%; margin: 30px auto; border: 1px solid #000; border-collapse: collapse">
+                <tr style="border-bottom: 1px solid #000">
+                    <td style="padding: 8px 15px; color: #fff; background-color: #CD212A">Name</td>
+                    <td style="padding: 8px 15px;">{{santee.name}}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #000">
+                    <td style="padding: 8px 15px; color: #fff; background-color: #CD212A">Email</td>
+                    <td style="padding: 8px 15px;">{{santee.email}} (verified)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #000">
+                    <td style="padding: 8px 15px; color: #fff; background-color: #CD212A">Twitter</td>
+                    <td style="padding: 8px 15px;">{{santee.twitter}}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #000">
+                    <td style="padding: 8px 15px; color: #fff; background-color: #CD212A">City</td>
+                    <td style="padding: 8px 15px;">{{santee.city}}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #000">
+                    <td style="padding: 8px 15px; color: #fff; background-color: #CD212A">Address</td>
+                    <td style="padding: 8px 15px;">{{santee.address}}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 15px; color: #fff; background-color: #CD212A">Wishlist</td>
+                    <td style="padding: 8px 15px;">
+                        <ul style="margin: 0; padding: 0;">
+                        {{#each santee.wishlist}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <p>Excited? Confused? No problem. We have created a list of FAQs which we <strong>highly recommend</strong> you to read once. <a href="{{baseurl}}/faqs">Click here</a> to read them.</p>
+            <p>Also if you are a Mumbai/Delhi user then you can avail the free services of <a href="http://urdelivery.com">UrDelivery.com</a> for shipping your santee gifts. Reply to this email for details :)</p>
+            <p>Use the hashtag <strong>#MySanta</strong> while sharing anything with us on twitter :) Feel free to reach out to us for any queries.</p>
+            <br>
+            <p>
+                <i>Be an awesome Santa!</i><br>
+                MySanta.in
+            </p>
+        </div>
+        <div class="email_footer" style="padding:5px; color: #fff; text-align: center; background-color:#CD212A;">
+        </div>
+    </div> <!-- /.email-body -->
+</body>
+</html>

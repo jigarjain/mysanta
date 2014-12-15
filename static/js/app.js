@@ -128,4 +128,28 @@ $(document).ready(function () {
         });
     });
 
+    // Remove pairing
+    $('.delete-pairing').click(function (e) {
+        e.preventDefault();
+        var that = this;
+        if (window.confirm('Really want to remove?')) {
+            $(that).html('Removing..');
+
+            $.ajax({
+                url: $(that).data('url'),
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    'pairingId': $(that).data('pid')
+                }
+            }).done(function(resp) {
+                if(resp.code === 1) {
+                    $(that).html('Removed').removeClass('.delete-pairing');
+                } else {
+                    window.alert(resp.error);
+                }
+            });
+        }
+
+    });
 });

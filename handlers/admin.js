@@ -177,4 +177,43 @@ router.post('/chimney/pairing/add', wrap (function* (req, res, next) {
     }
 }));
 
+router.get('/chimney/pairing/all', wrap (function* (req, res, next) {
+    try {
+        var pageData = {
+            'allPairings': yield pairingModel.Repo.getAll(),
+            'title': 'Total pairings'
+        };
+
+        res.render('admin/allPairings', pageData);
+    } catch (e) {
+        next(e);
+    }
+}));
+
+router.post('/chimney/pairing/delete', wrap (function* (req, res, next) {
+    try {
+        var pairingId = req.body.pairingId;
+        var output = {
+            'code': null,
+            'error': null,
+            'url': null
+        };
+
+        // Remove pairing
+        yield pairingModel.Repo.remove(pairingId);
+        output = {
+            'code': 1,
+        };
+
+        res.jsonp(output);
+    } catch (e) {
+        var output = {
+            'code': 0,
+            'error': 'Something went wrong. Try again',
+        };
+        res.jsonp(output);
+        next(e);
+    }
+}));
+
 module.exports = router;

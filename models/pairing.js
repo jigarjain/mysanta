@@ -18,6 +18,8 @@ module.exports = function () {
         this.createTime = null;
 
         this.updateTime = null;
+
+        this.emailSent = false;
     }
 
 

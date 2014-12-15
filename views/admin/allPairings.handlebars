@@ -1,0 +1,31 @@
+<h1 class="text-center">Total pairings: {{allPairings.length}}</h1>
+<div class="row">
+    <div class="small-12 columns">
+        <table class="small-12">
+            <thead>
+                <th>Santa</th>
+                <th>Santee</th>
+                <th>Email sent?</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {{#each allPairings}}
+                <tr>
+                    <td>
+                        {{santa.name}}<br>
+                        {{santa.email}}<br>
+                        {{santa.twitter}}<br>
+                    </td>
+                    <td>
+                        {{santee.name}}<br>
+                        {{santee.email}}<br>
+                        {{santee.twitter}}<br>
+                    </td>
+                    <td>{{#if emailSent}}Yes{{else}}No{{/if}}</td>
+                    <td><button class="delete-pairing small" data-pid="{{_id}}" data-url="/admin/chimney/pairing/delete">Delete</button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -68,6 +68,40 @@ function sendUpdateEntryEmail(entry) {
     });
 }
 
+function sendSanteeEmail(pairing) {
+    return new Promise(function (resolve, reject) {
+        var data = _.extend({}, pairing);
+
+        data.baseurl = cfg.baseurl;
+
+        // Check for twitter handle
+        if (! data.santee.twitter || ! data.santee.twitter.length) {
+            data.santee.twitter = '-';
+        }
+
+        // Check for address
+        if (! data.santee.address || ! data.santee.address.length) {
+            data.santee.address = '-';
+        }
+
+        app.render('emailers/santeeEmail', data, function(err, html) {
+
+            if (err) {
+                console.log(err);
+                return reject(err);
+            }
+
+            var subject = 'Brace yourself! Details of your Santee are here';
+            var to = pairing.santa.email;
+
+            return sendEmail(html, subject, to)
+                .then(function (result) {
+                    resolve(result);
+                });
+        });
+    });
+}
+
 
 function sendEmail(html, subject, to) {
     return new Promise(function (resolve, reject) {
@@ -84,7 +118,6 @@ function sendEmail(html, subject, to) {
             ]
         };
 
-
         mandrillClient.messages.send({'message': message}, function(result) {
             console.log(result);
             resolve(result);
@@ -98,4 +131,5 @@ function sendEmail(html, subject, to) {
 module.exports = {
     'sendConfirmationEmail': sendConfirmationEmail,
     'sendUpdateEntryEmail': sendUpdateEntryEmail,
+    'sendSanteeEmail': sendSanteeEmail
 };

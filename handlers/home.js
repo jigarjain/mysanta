@@ -18,4 +18,12 @@ router.get('/', wrap(function* (req, res, next) {
     }
 }));
 
+router.get('/faqs', function (req, res) {
+    var pageData = {
+        'title': 'MySanta - FAQs'
+    };
+
+    res.render('faqs', pageData);
+});
+
 module.exports = router;

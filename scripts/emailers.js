@@ -1,21 +1,28 @@
 var co             = require('co'),
     emailer        = require('../emailers/emailer'),
-    entryModel     = require('../models/entries')(),
+    pairingModel   = require('../models/pairing')(),
     _              = require('lodash');
 
-co(function*  sendUpdateEntriesEmail() {
-    // Fetch all entries
-    var allEntries = yield entryModel.Repo.getAll();
-    console.log('entries fetched: ' + allEntries.length);
+co(function*  sendSanteeEmail() {
+    // Fetch all pairings
+    var allEntries = yield pairingModel.Repo.getAll();
+    console.log('Pairings fetched: ' + allEntries.length);
 
-    allEntries = _.filter(allEntries, function (entry) {
-        return ! entry.updated;
+    allEntries = _.filter(allEntries, function (pairing) {
+        return ! pairing.emailSent;
     });
 
+    console.log('Pairings to send: ' + allEntries.length);
+
     // Send update email for every entry;
-    for(var i = 0; i <= allEntries.length; i++) {
-        yield emailer.sendUpdateEntryEmail(allEntries[i]);
+    for(var i = 0; i < allEntries.length; i++) {
+
+        yield emailer.sendSanteeEmail(allEntries[i]);
+        allEntries[i].emailSent = true;
+        yield pairingModel.Repo.update(allEntries[i]);
         console.log();
         console.log();
     }
+
+    console.log('All sent');
 }).catch();
